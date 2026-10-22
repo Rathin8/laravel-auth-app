@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Google Fonts -->
@@ -479,6 +480,78 @@
             font-size: 0.75rem;
         }
 
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 14px 4px 6px;
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .user-pill-avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(99, 102, 241, 0.35);
+        }
+
+        .user-pill-name {
+            max-width: 130px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .btn-nav-logout {
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(244, 63, 94, 0.28);
+            color: #fda4af !important;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-nav-logout:hover {
+            background: rgba(244, 63, 94, 0.24);
+            border-color: rgba(244, 63, 94, 0.45);
+            color: #ffffff !important;
+        }
+
+        .btn-logout {
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(244, 63, 94, 0.28);
+            color: #fda4af;
+        }
+
+        .btn-logout:hover {
+            background: rgba(244, 63, 94, 0.24);
+            border-color: rgba(244, 63, 94, 0.45);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 7px 14px;
+            font-size: 0.82rem;
+        }
+
         @media (max-width: 640px) {
             .app-container {
                 padding: 16px 14px 36px;
@@ -521,10 +594,20 @@
             </a>
 
             <nav>
-                <ul class="nav-links">
-                    {{-- <li><a href="{{ url('/') }}" class="nav-link">Landing</a></li> --}}
+                <ul class="nav-links" id="navLinks">
                     <li><a href="{{ route('home') }}" class="nav-link" style="color: #ffffff; background: rgba(255,255,255,0.06);">Home</a></li>
-                    <li><a href="{{ route('register') }}" class="nav-link nav-cta">Register</a></li>
+                    @auth
+                        <li class="user-pill">
+                            <div class="user-pill-avatar">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</div>
+                            <span class="user-pill-name">{{ Auth::user()->name }}</span>
+                        </li>
+                        <li>
+                            <button type="button" class="nav-link btn-nav-logout logout-trigger">Sign Out</button>
+                        </li>
+                    @else
+                        <li id="navSignInItem"><a href="{{ route('login') }}" class="nav-link">Sign In</a></li>
+                        <li id="navRegisterItem"><a href="{{ route('register') }}" class="nav-link nav-cta">Register</a></li>
+                    @endauth
                 </ul>
             </nav>
         </header>
@@ -543,63 +626,78 @@
 
         <!-- Main Hero Card -->
         <main class="hero-card">
-            <h1 class="hero-title">
+            <h1 class="hero-title" id="heroGreeting">
                 @auth
-                    Welcome back, {{ Auth::user()->name }}! 👋
+                    Welcome back, <span class="gradient-text" id="heroUserName">{{ Auth::user()->name }}</span>! 👋
                 @else
-                    Welcome to your application workspace 👋
+                    <span id="heroWelcomeText">Welcome to your application workspace 👋</span>
                 @endauth
             </h1>
 
-            <p class="hero-subtitle">
-                Everything is running properly on your local server. You can explore authentication routes, test the brand-new registration flow, or inspect backend APIs.
+            <p class="hero-subtitle" id="heroSubtitle">
+                @auth
+                    You are successfully authenticated. Explore features, test protected API endpoints, or manage your account session below.
+                @else
+                    Everything is running properly on your local server. You can explore authentication routes, test the brand-new registration flow, or inspect backend APIs.
+                @endauth
             </p>
 
             <!-- User Auth Status Box -->
-            <div class="auth-profile-box">
+            <div class="auth-profile-box" id="authProfileBox">
                 @auth
                     <div class="profile-info">
-                        <div class="profile-avatar">
+                        <div class="profile-avatar" id="profileAvatar">
                             {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
                         <div class="profile-details">
-                            <h3>{{ Auth::user()->name }}</h3>
-                            <p>{{ Auth::user()->email }}</p>
+                            <h3 id="profileName">{{ Auth::user()->name }}</h3>
                         </div>
-                    </div>
-                    <div class="verified-tag">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>Authenticated User</span>
                     </div>
                 @else
                     <div class="profile-info">
-                        <div class="profile-avatar" style="background: rgba(71, 85, 105, 0.6); color: #cbd5e1;">
+                        <div class="profile-avatar" id="profileAvatar" style="background: rgba(71, 85, 105, 0.6); color: #cbd5e1;">
                             ?
                         </div>
                         <div class="profile-details">
-                            <h3>Guest Session</h3>
-                            <p>You are not currently logged in. Create an account to test the auth flow.</p>
+                            <h3 id="profileName">Guest Session</h3>
+                            <p id="profileEmail">You are not currently logged in. Create an account or sign in to test the auth flow.</p>
                         </div>
                     </div>
-                    <a href="{{ route('register') }}" class="btn btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">
-                        Sign Up Now &rarr;
-                    </a>
+                    <div id="profileActionArea" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                        <a href="{{ route('login') }}" class="btn btn-secondary btn-sm" id="profileLoginBtn">
+                            Sign In
+                        </a>
+                        <a href="{{ route('register') }}" class="btn btn-primary btn-sm" id="profileRegisterBtn">
+                            Sign Up Now &rarr;
+                        </a>
+                    </div>
                 @endauth
             </div>
 
             <!-- Action Buttons -->
-            <div class="hero-actions">
-                <a href="{{ route('register') }}" class="btn btn-primary">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                    </svg>
-                    <span>Open Registration Form</span>
-                </a>
+            <div class="hero-actions" id="heroActions" @auth style="display: none;" @endauth>
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-primary" id="heroActionLogin">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Sign In to Account</span>
+                    </a>
+                    <a href="{{ route('register') }}" class="btn btn-secondary" id="heroActionRegister">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        </svg>
+                        <span>Open Registration Form</span>
+                    </a>
+                @endguest
             </div>
         </main>
     </div>
+
+    <!-- Hidden Web Logout Form -->
+    <form id="webLogoutForm" method="POST" action="{{ route('logout') }}" style="display: none;">
+        @csrf
+    </form>
 
     <!-- App Footer -->
     <footer class="app-footer">
@@ -611,5 +709,174 @@
         <p>&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All rights reserved.</p>
     </footer>
 
+    <!-- Dynamic Client-Side Auth Handler -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const serverUser = @json(Auth::user());
+            const authToken = localStorage.getItem('auth_token');
+            let localUser = null;
+
+            try {
+                const stored = localStorage.getItem('user');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    localUser = (parsed && parsed.data) ? parsed.data : parsed;
+                }
+            } catch (e) {
+                console.error('Could not parse user from localStorage', e);
+            }
+
+            const heroGreeting = document.getElementById('heroGreeting');
+            const heroSubtitle = document.getElementById('heroSubtitle');
+            const authProfileBox = document.getElementById('authProfileBox');
+            const heroActions = document.getElementById('heroActions');
+            const navLinks = document.getElementById('navLinks');
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            function renderAuthenticatedUI(user, authSource = 'Token') {
+                const name = user.name || 'User';
+                const email = user.email || '';
+                const initial = name.charAt(0).toUpperCase();
+                const escapedName = escapeHtml(name);
+                const escapedEmail = escapeHtml(email);
+
+                // Update Hero Greeting with user name
+                if (heroGreeting) {
+                    heroGreeting.innerHTML = `Welcome back, <span class="gradient-text">${escapedName}</span>! 👋`;
+                }
+
+                // Update Hero Subtitle
+                if (heroSubtitle) {
+                    heroSubtitle.textContent = `You are successfully authenticated. Explore features, test protected API endpoints, or manage your account session below.`;
+                }
+
+                // Update Auth Profile Box
+                if (authProfileBox) {
+                    authProfileBox.innerHTML = `
+                        <div class="profile-info">
+                            <div class="profile-avatar">
+                                ${initial}
+                            </div>
+                            <div class="profile-details">
+                                <h3>${escapedName}</h3>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Update Navbar
+                if (navLinks) {
+                    navLinks.innerHTML = `
+                        <li><a href="{{ route('home') }}" class="nav-link" style="color: #ffffff; background: rgba(255,255,255,0.06);">Home</a></li>
+                        <li class="user-pill">
+                            <div class="user-pill-avatar">${initial}</div>
+                            <span class="user-pill-name">${escapedName}</span>
+                        </li>
+                        <li>
+                            <button type="button" class="nav-link btn-nav-logout logout-trigger">Sign Out</button>
+                        </li>
+                    `;
+                }
+
+                // Hide below action buttons when authenticated
+                if (heroActions) {
+                    heroActions.style.display = 'none';
+                    heroActions.innerHTML = '';
+                }
+
+                // Re-bind click event to all logout triggers
+                bindLogoutTriggers();
+            }
+
+            async function performLogout() {
+                const token = localStorage.getItem('auth_token');
+
+                if (token) {
+                    try {
+                        await fetch('/api/logout', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`,
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                            }
+                        });
+                    } catch (e) {
+                        console.warn('API logout failed', e);
+                    }
+                }
+
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('user');
+
+                const webLogoutForm = document.getElementById('webLogoutForm');
+                if (webLogoutForm && serverUser) {
+                    webLogoutForm.submit();
+                    return;
+                }
+
+                window.location.href = '{{ route("login") }}';
+            }
+
+            function bindLogoutTriggers() {
+                document.querySelectorAll('.logout-trigger').forEach(btn => {
+                    btn.onclick = (e) => {
+                        e.preventDefault();
+                        performLogout();
+                    };
+                });
+            }
+
+            // Initial binding for server-rendered logout triggers
+            bindLogoutTriggers();
+
+            // Check authentication state
+            if (serverUser) {
+                // Keep local storage in sync
+                if (!localStorage.getItem('user')) {
+                    localStorage.setItem('user', JSON.stringify(serverUser));
+                }
+            } else if (authToken && localUser && localUser.name) {
+                // Dynamically display authenticated user from token storage
+                renderAuthenticatedUI(localUser, 'API Token');
+
+                // Verify token validity and sync user data with /api/profile
+                fetch('/api/profile', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                })
+                .then(res => {
+                    if (res.status === 401) {
+                        localStorage.removeItem('auth_token');
+                        localStorage.removeItem('user');
+                        window.location.reload();
+                    } else if (res.ok) {
+                        return res.json();
+                    }
+                })
+                .then(json => {
+                    if (json && json.data) {
+                        localStorage.setItem('user', JSON.stringify(json.data));
+                        if (json.data.name !== localUser.name || json.data.email !== localUser.email) {
+                            renderAuthenticatedUI(json.data, 'API Token');
+                        }
+                    }
+                })
+                .catch(() => {});
+            }
+        });
+    </script>
 </body>
 </html>

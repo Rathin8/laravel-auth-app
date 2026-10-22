@@ -802,7 +802,7 @@
             <!-- Card Footer -->
             <div class="card-footer">
                 Already registered?
-                <a href="{{ route('home') }}">Sign in to your account</a>
+                <a href="{{ route('login') }}">Sign in to your account</a>
             </div>
 
         </div>
