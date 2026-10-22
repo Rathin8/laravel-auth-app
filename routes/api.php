@@ -6,9 +6,8 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
 Route::post('/register', [RegisterController::class, 'store']);
-Route::post('/login', [LoginController::class, 'store'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->name('api.login');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', function (Request $request) {
