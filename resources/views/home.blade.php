@@ -117,6 +117,8 @@
             gap: 12px;
             text-decoration: none;
             color: var(--text-primary);
+            cursor: default;
+            user-select: none;
         }
 
         .brand-icon {
@@ -552,6 +554,212 @@
             font-size: 0.82rem;
         }
 
+        /* Minimal Dashboard Styles */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            margin-bottom: 32px;
+        }
+
+        .dashboard-header-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 34px 38px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+        }
+
+        .dashboard-welcome-wrap {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .dashboard-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 14px;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.28);
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            margin-bottom: 14px;
+        }
+
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            max-width: 560px;
+        }
+
+        .dashboard-user-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 20px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+        }
+
+        .dashboard-user-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        }
+
+        .dashboard-user-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dashboard-user-name {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .dashboard-user-role {
+            font-size: 0.76rem;
+            color: #34d399;
+            font-weight: 600;
+        }
+
+        .dashboard-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 22px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.25s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--card-border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.4);
+        }
+
+        .stat-info {
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .stat-value-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .stat-value {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .stat-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 9999px;
+        }
+
+        .stat-pill-emerald {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .stat-pill-indigo {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .stat-pill-cyan {
+            background: rgba(6, 182, 212, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .dashboard-actions-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 22px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .dashboard-actions-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .dashboard-actions-desc {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+        }
+
+        .dashboard-quick-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
         @media (max-width: 640px) {
             .app-container {
                 padding: 16px 14px 36px;
@@ -582,7 +790,7 @@
 
         <!-- Top Navigation -->
         <header class="navbar">
-            <a href="{{ url('/') }}" class="brand-link">
+            <div class="brand-link">
                 <div class="brand-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
@@ -590,21 +798,28 @@
                         <polyline points="2 12 12 17 22 12"></polyline>
                     </svg>
                 </div>
-                <span class="brand-name">{{ config('app.name', 'Laravel') }}</span>
-            </a>
+                <span class="brand-name">Workspace</span>
+            </div>
 
+            @php
+                $firstName = Auth::check() ? explode(' ', trim(Auth::user()->name))[0] : '';
+                $safeServerUser = Auth::check() ? [
+                    'id' => Auth::id(),
+                    'name' => $firstName,
+                ] : null;
+            @endphp
             <nav>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="{{ route('home') }}" class="nav-link" style="color: #ffffff; background: rgba(255,255,255,0.06);">Home</a></li>
                     @auth
                         <li class="user-pill">
-                            <div class="user-pill-avatar">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</div>
-                            <span class="user-pill-name">{{ Auth::user()->name }}</span>
+                            <div class="user-pill-avatar">{{ strtoupper(substr($firstName, 0, 1)) }}</div>
+                            <span class="user-pill-name" id="navUserName">{{ $firstName }}</span>
                         </li>
                         <li>
                             <button type="button" class="nav-link btn-nav-logout logout-trigger">Sign Out</button>
                         </li>
                     @else
+                        <li><a href="{{ route('home') }}" class="nav-link" style="color: #ffffff; background: rgba(255,255,255,0.06);">Home</a></li>
                         <li id="navSignInItem"><a href="{{ route('login') }}" class="nav-link">Sign In</a></li>
                         <li id="navRegisterItem"><a href="{{ route('register') }}" class="nav-link nav-cta">Register</a></li>
                     @endauth
@@ -624,74 +839,77 @@
             </div>
         @endif
 
-        <!-- Main Hero Card -->
-        <main class="hero-card">
-            <h1 class="hero-title" id="heroGreeting">
-                @auth
-                    Welcome back, <span class="gradient-text" id="heroUserName">{{ Auth::user()->name }}</span>! 👋
-                @else
-                    <span id="heroWelcomeText">Welcome to your application workspace 👋</span>
-                @endauth
-            </h1>
-
-            <p class="hero-subtitle" id="heroSubtitle">
-                @auth
-                    You are successfully authenticated. Explore features, test protected API endpoints, or manage your account session below.
-                @else
-                    Everything is running properly on your local server. You can explore authentication routes, test the brand-new registration flow, or inspect backend APIs.
-                @endauth
-            </p>
-
-            <!-- User Auth Status Box -->
-            <div class="auth-profile-box" id="authProfileBox">
-                @auth
-                    <div class="profile-info">
-                        <div class="profile-avatar" id="profileAvatar">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                        </div>
-                        <div class="profile-details">
-                            <h3 id="profileName">{{ Auth::user()->name }}</h3>
+        <!-- Main View (Displayed based on whether user is logged in or not) -->
+        <div id="viewContainer">
+            @auth
+                <!-- Minimal Dashboard View (Displayed when user is logged in) -->
+                <main id="dashboardView" class="dashboard-container">
+                    <!-- Dashboard Header -->
+                    <div class="dashboard-header-card">
+                        <div class="dashboard-welcome-wrap">
+                            <div class="dashboard-badge">
+                                <span class="badge-dot"></span>
+                                <span id="dashBadgeText">Active Dashboard</span>
+                            </div>
+                            <h1 class="dashboard-title">
+                                Welcome back, <span class="gradient-text" id="dashGreetingName">{{ $firstName }}</span> 👋
+                            </h1>
+                            <p class="dashboard-subtitle">
+                                Here is your workspace dashboard. Everything is active and running securely.
+                            </p>
                         </div>
                     </div>
-                @else
-                    <div class="profile-info">
-                        <div class="profile-avatar" id="profileAvatar" style="background: rgba(71, 85, 105, 0.6); color: #cbd5e1;">
-                            ?
+                </main>
+            @else
+                <!-- Guest Home View (Displayed when user is NOT logged in) -->
+                <main id="guestHomeView" class="hero-card">
+                    <h1 class="hero-title" id="heroGreeting">
+                        Welcome to your application workspace 👋
+                    </h1>
+
+                    <p class="hero-subtitle" id="heroSubtitle">
+                        Access your account, manage your secure profile, and experience a seamless dashboard. Sign in or register below to get started.
+                    </p>
+
+                    <!-- User Auth Status Box -->
+                    <div class="auth-profile-box" id="authProfileBox">
+                        <div class="profile-info">
+                            <div class="profile-avatar" id="profileAvatar" style="background: rgba(71, 85, 105, 0.6); color: #cbd5e1;">
+                                ?
+                            </div>
+                            <div class="profile-details">
+                                <h3 id="profileName">Guest Session</h3>
+                                <p id="profileEmail">You are not currently logged in. Create an account or sign in to test the auth flow.</p>
+                            </div>
                         </div>
-                        <div class="profile-details">
-                            <h3 id="profileName">Guest Session</h3>
-                            <p id="profileEmail">You are not currently logged in. Create an account or sign in to test the auth flow.</p>
+                        <div id="profileActionArea" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <a href="{{ route('login') }}" class="btn btn-secondary btn-sm" id="profileLoginBtn">
+                                Sign In
+                            </a>
+                            <a href="{{ route('register') }}" class="btn btn-primary btn-sm" id="profileRegisterBtn">
+                                Sign Up Now &rarr;
+                            </a>
                         </div>
                     </div>
-                    <div id="profileActionArea" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                        <a href="{{ route('login') }}" class="btn btn-secondary btn-sm" id="profileLoginBtn">
-                            Sign In
+
+                    <!-- Action Buttons -->
+                    <div class="hero-actions" id="heroActions">
+                        <a href="{{ route('login') }}" class="btn btn-primary" id="heroActionLogin">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                            </svg>
+                            <span>Sign In to Account</span>
                         </a>
-                        <a href="{{ route('register') }}" class="btn btn-primary btn-sm" id="profileRegisterBtn">
-                            Sign Up Now &rarr;
+                        <a href="{{ route('register') }}" class="btn btn-secondary" id="heroActionRegister">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                            </svg>
+                            <span>Open Registration Form</span>
                         </a>
                     </div>
-                @endauth
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="hero-actions" id="heroActions" @auth style="display: none;" @endauth>
-                @guest
-                    <a href="{{ route('login') }}" class="btn btn-primary" id="heroActionLogin">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                        </svg>
-                        <span>Sign In to Account</span>
-                    </a>
-                    <a href="{{ route('register') }}" class="btn btn-secondary" id="heroActionRegister">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                        </svg>
-                        <span>Open Registration Form</span>
-                    </a>
-                @endguest
-            </div>
-        </main>
+                </main>
+            @endauth
+        </div>
     </div>
 
     <!-- Hidden Web Logout Form -->
@@ -699,20 +917,10 @@
         @csrf
     </form>
 
-    <!-- App Footer -->
-    <footer class="app-footer">
-        <div class="footer-badges">
-            <span class="footer-pill">PHP 8.2</span>
-            <span class="footer-pill">Laravel 12</span>
-            <span class="footer-pill">MySQL</span>
-        </div>
-        <p>&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All rights reserved.</p>
-    </footer>
-
     <!-- Dynamic Client-Side Auth Handler -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const serverUser = @json(Auth::user());
+            const serverUser = @json($safeServerUser);
             const authToken = localStorage.getItem('auth_token');
             let localUser = null;
 
@@ -726,10 +934,8 @@
                 console.error('Could not parse user from localStorage', e);
             }
 
-            const heroGreeting = document.getElementById('heroGreeting');
-            const heroSubtitle = document.getElementById('heroSubtitle');
-            const authProfileBox = document.getElementById('authProfileBox');
-            const heroActions = document.getElementById('heroActions');
+            const viewContainer = document.getElementById('viewContainer');
+            const initialGuestHtml = viewContainer && !serverUser ? viewContainer.innerHTML : '';
             const navLinks = document.getElementById('navLinks');
 
             function escapeHtml(str) {
@@ -742,44 +948,55 @@
                     .replace(/'/g, '&#039;');
             }
 
-            function renderAuthenticatedUI(user, authSource = 'Token') {
-                const name = user.name || 'User';
-                const email = user.email || '';
-                const initial = name.charAt(0).toUpperCase();
-                const escapedName = escapeHtml(name);
-                const escapedEmail = escapeHtml(email);
+            function getFirstName(fullName) {
+                if (!fullName) return 'User';
+                return fullName.trim().split(/\s+/)[0];
+            }
 
-                // Update Hero Greeting with user name
-                if (heroGreeting) {
-                    heroGreeting.innerHTML = `Welcome back, <span class="gradient-text">${escapedName}</span>! 👋`;
-                }
+            function getDashboardHtml(firstName, initial, authSource) {
+                const escapedFirstName = escapeHtml(firstName);
+                const authMethod = (authSource === 'Session') ? 'Web Session' : 'Token 256-bit';
 
-                // Update Hero Subtitle
-                if (heroSubtitle) {
-                    heroSubtitle.textContent = `You are successfully authenticated. Explore features, test protected API endpoints, or manage your account session below.`;
-                }
-
-                // Update Auth Profile Box
-                if (authProfileBox) {
-                    authProfileBox.innerHTML = `
-                        <div class="profile-info">
-                            <div class="profile-avatar">
-                                ${initial}
-                            </div>
-                            <div class="profile-details">
-                                <h3>${escapedName}</h3>
+                return `
+                    <main id="dashboardView" class="dashboard-container">
+                        <div class="dashboard-header-card">
+                            <div class="dashboard-welcome-wrap">
+                                <div class="dashboard-badge">
+                                    <span class="badge-dot"></span>
+                                    <span id="dashBadgeText">Active Dashboard</span>
+                                </div>
+                                <h1 class="dashboard-title">
+                                    Welcome back, <span class="gradient-text" id="dashGreetingName">${escapedFirstName}</span> 👋
+                                </h1>
+                                <p class="dashboard-subtitle">
+                                    Here is your workspace dashboard. Everything is active and running securely.
+                                </p>
                             </div>
                         </div>
-                    `;
+                    </main>
+                `;
+            }
+
+            function renderAuthenticatedDashboard(user, authSource = 'Token') {
+                const fullName = user.name || 'User';
+                const firstName = getFirstName(fullName);
+                const initial = firstName.charAt(0).toUpperCase();
+                const escapedFirstName = escapeHtml(firstName);
+
+                const existingDashboard = document.getElementById('dashboardView');
+                if (!existingDashboard && viewContainer) {
+                    viewContainer.innerHTML = getDashboardHtml(firstName, initial, authSource);
+                } else {
+                    const dashGreetingName = document.getElementById('dashGreetingName');
+                    if (dashGreetingName) dashGreetingName.textContent = escapedFirstName;
                 }
 
-                // Update Navbar
+                // Update Navbar with First Name ONLY and Sign Out button
                 if (navLinks) {
                     navLinks.innerHTML = `
-                        <li><a href="{{ route('home') }}" class="nav-link" style="color: #ffffff; background: rgba(255,255,255,0.06);">Home</a></li>
                         <li class="user-pill">
                             <div class="user-pill-avatar">${initial}</div>
-                            <span class="user-pill-name">${escapedName}</span>
+                            <span class="user-pill-name">${escapedFirstName}</span>
                         </li>
                         <li>
                             <button type="button" class="nav-link btn-nav-logout logout-trigger">Sign Out</button>
@@ -787,14 +1004,22 @@
                     `;
                 }
 
-                // Hide below action buttons when authenticated
-                if (heroActions) {
-                    heroActions.style.display = 'none';
-                    heroActions.innerHTML = '';
-                }
-
                 // Re-bind click event to all logout triggers
                 bindLogoutTriggers();
+            }
+
+            function renderGuestView() {
+                if (viewContainer && initialGuestHtml) {
+                    viewContainer.innerHTML = initialGuestHtml;
+                }
+
+                if (navLinks) {
+                    navLinks.innerHTML = `
+                        <li><a href="{{ route('home') }}" class="nav-link" style="color: #ffffff; background: rgba(255,255,255,0.06);">Home</a></li>
+                        <li id="navSignInItem"><a href="{{ route('login') }}" class="nav-link">Sign In</a></li>
+                        <li id="navRegisterItem"><a href="{{ route('register') }}" class="nav-link nav-cta">Register</a></li>
+                    `;
+                }
             }
 
             async function performLogout() {
@@ -825,6 +1050,7 @@
                     return;
                 }
 
+                renderGuestView();
                 window.location.href = '{{ route("login") }}';
             }
 
@@ -842,13 +1068,14 @@
 
             // Check authentication state
             if (serverUser) {
-                // Keep local storage in sync
+                // Server-authenticated session
                 if (!localStorage.getItem('user')) {
                     localStorage.setItem('user', JSON.stringify(serverUser));
                 }
+                renderAuthenticatedDashboard(serverUser, 'Session');
             } else if (authToken && localUser && localUser.name) {
-                // Dynamically display authenticated user from token storage
-                renderAuthenticatedUI(localUser, 'API Token');
+                // Token-authenticated session
+                renderAuthenticatedDashboard(localUser, 'API Token');
 
                 // Verify token validity and sync user data with /api/profile
                 fetch('/api/profile', {
@@ -861,7 +1088,7 @@
                     if (res.status === 401) {
                         localStorage.removeItem('auth_token');
                         localStorage.removeItem('user');
-                        window.location.reload();
+                        renderGuestView();
                     } else if (res.ok) {
                         return res.json();
                     }
@@ -869,12 +1096,15 @@
                 .then(json => {
                     if (json && json.data) {
                         localStorage.setItem('user', JSON.stringify(json.data));
-                        if (json.data.name !== localUser.name || json.data.email !== localUser.email) {
-                            renderAuthenticatedUI(json.data, 'API Token');
+                        if (json.data.name !== localUser.name) {
+                            renderAuthenticatedDashboard(json.data, 'API Token');
                         }
                     }
                 })
                 .catch(() => {});
+            } else {
+                // Guest state
+                renderGuestView();
             }
         });
     </script>
