@@ -37,6 +37,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home')->with('status', 'Registration successful! Welcome to the platform, ' . $user->name . '.');
+        return redirect()->route('home')->with('status', 'Registration successful! Welcome to the platform, '.$user->name.'.');
     }
 }

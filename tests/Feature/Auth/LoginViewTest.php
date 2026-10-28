@@ -22,7 +22,7 @@ test('home screen can be rendered for guest', function () {
     $response->assertSee('Guest Session');
 });
 
-test('home screen renders user name when authenticated via web session', function () {
+test('home screen renders first name only and dashboard when authenticated via web session', function () {
     /** @var User $user */
     $user = User::factory()->create([
         'name' => 'Sarah Connor',
@@ -32,8 +32,10 @@ test('home screen renders user name when authenticated via web session', functio
     $response = $this->actingAs($user)->get('/home');
 
     $response->assertOk();
-    $response->assertSee('Sarah Connor');
-    $response->assertSee('Authenticated User');
+    $response->assertSee('Sarah');
+    $response->assertDontSee('Sarah Connor');
+    $response->assertSee('Active Dashboard');
+    $response->assertDontSee('Guest Session');
 });
 
 test('home screen includes client-side script for dynamic token authentication', function () {
