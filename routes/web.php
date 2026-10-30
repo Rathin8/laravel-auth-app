@@ -22,10 +22,12 @@ Route::post('/logout', function (Request $request) {
 })->name('logout');
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', [RegisterController::class, 'create'])->name('register');
-    Route::get('/register', [RegisterController::class, 'create']);
-    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('/', function () {
+        return view('auth.login');
+    });
     Route::get('/login', function () {
         return view('auth.login');
     })->name('login');
+    Route::get('/register', [RegisterController::class, 'create'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 });

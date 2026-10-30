@@ -921,17 +921,22 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const serverUser = @json($safeServerUser);
-            const authToken = localStorage.getItem('auth_token');
+
+            // Clear any lingering persistent storage so sessions don't survive browser restart
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user');
+
+            const authToken = sessionStorage.getItem('auth_token');
             let localUser = null;
 
             try {
-                const stored = localStorage.getItem('user');
+                const stored = sessionStorage.getItem('user');
                 if (stored) {
                     const parsed = JSON.parse(stored);
                     localUser = (parsed && parsed.data) ? parsed.data : parsed;
                 }
             } catch (e) {
-                console.error('Could not parse user from localStorage', e);
+                console.error('Could not parse user from sessionStorage', e);
             }
 
             const viewContainer = document.getElementById('viewContainer');
@@ -1023,7 +1028,7 @@
             }
 
             async function performLogout() {
-                const token = localStorage.getItem('auth_token');
+                const token = sessionStorage.getItem('auth_token');
 
                 if (token) {
                     try {
@@ -1041,6 +1046,8 @@
                     }
                 }
 
+                sessionStorage.removeItem('auth_token');
+                sessionStorage.removeItem('user');
                 localStorage.removeItem('auth_token');
                 localStorage.removeItem('user');
 
@@ -1051,7 +1058,7 @@
                 }
 
                 renderGuestView();
-                window.location.href = '{{ route("login") }}';
+                window.location.replace('{{ route("login") }}');
             }
 
             function bindLogoutTriggers() {
@@ -1063,14 +1070,21 @@
                 });
             }
 
+            // Invalidate bfcache and force reload if navigating back/forward
+            window.addEventListener('pageshow', (event) => {
+                if (event.persisted || (window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0]?.type === 'back_forward')) {
+                    window.location.reload();
+                }
+            });
+
             // Initial binding for server-rendered logout triggers
             bindLogoutTriggers();
 
             // Check authentication state
             if (serverUser) {
                 // Server-authenticated session
-                if (!localStorage.getItem('user')) {
-                    localStorage.setItem('user', JSON.stringify(serverUser));
+                if (!sessionStorage.getItem('user')) {
+                    sessionStorage.setItem('user', JSON.stringify(serverUser));
                 }
                 renderAuthenticatedDashboard(serverUser, 'Session');
             } else if (authToken && localUser && localUser.name) {
@@ -1086,8 +1100,8 @@
                 })
                 .then(res => {
                     if (res.status === 401) {
-                        localStorage.removeItem('auth_token');
-                        localStorage.removeItem('user');
+                        sessionStorage.removeItem('auth_token');
+                        sessionStorage.removeItem('user');
                         renderGuestView();
                     } else if (res.ok) {
                         return res.json();
@@ -1095,7 +1109,7 @@
                 })
                 .then(json => {
                     if (json && json.data) {
-                        localStorage.setItem('user', JSON.stringify(json.data));
+                        sessionStorage.setItem('user', JSON.stringify(json.data));
                         if (json.data.name !== localUser.name) {
                             renderAuthenticatedDashboard(json.data, 'API Token');
                         }

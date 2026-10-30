@@ -702,14 +702,6 @@
                 <a href="{{ route('register') }}">Create an account</a>
             </div>
 
-            <!-- Security Badge -->
-            <div class="security-bar">
-                <svg width="14" height="14" fill="none" stroke="#10b981" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                <span>Token-based 256-bit encrypted authentication</span>
-            </div>
-
         </div>
 
         <!-- Back to Website -->
@@ -794,9 +786,13 @@
                 alertIconSuccess.style.display = type === 'success' ? 'block' : 'none';
             }
 
-            // Detect existing token session
-            const existingToken = localStorage.getItem('auth_token');
-            const existingUserStr = localStorage.getItem('user');
+            // Clear any legacy persistent storage so sessions don't survive browser close
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user');
+
+            // Detect existing token session in current browser session
+            const existingToken = sessionStorage.getItem('auth_token');
+            const existingUserStr = sessionStorage.getItem('user');
             if (existingToken && existingUserStr) {
                 try {
                     const parsedUser = JSON.parse(existingUserStr);
@@ -833,17 +829,17 @@
                     const data = await response.json();
 
                     if (response.ok) {
-                        // Store token and user data in localStorage
+                        // Store token and user data in sessionStorage (cleared automatically when browser/app is closed)
                         if (data.token) {
-                            localStorage.setItem('auth_token', data.token);
-                            localStorage.setItem('user', JSON.stringify(data.user || {}));
+                            sessionStorage.setItem('auth_token', data.token);
+                            sessionStorage.setItem('user', JSON.stringify(data.user || {}));
                         }
 
                         showAlert('Login successful! Redirecting to home...', 'success');
                         btnText.textContent = 'Redirecting...';
 
                         setTimeout(() => {
-                            window.location.href = '{{ route("home") }}';
+                            window.location.replace('{{ route("home") }}');
                         }, 750);
                     } else if (response.status === 422) {
                         // Validation or credentials error
@@ -869,6 +865,13 @@
                 } catch (error) {
                     showAlert('Network error: Unable to connect to the authentication server.');
                     setLoading(false);
+                }
+            });
+
+            // Invalidate bfcache and force reload if navigating back/forward
+            window.addEventListener('pageshow', (event) => {
+                if (event.persisted || (window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0]?.type === 'back_forward')) {
+                    window.location.reload();
                 }
             });
         });
