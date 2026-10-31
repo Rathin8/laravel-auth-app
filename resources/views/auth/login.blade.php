@@ -504,17 +504,237 @@
             color: #e2e8f0;
         }
 
-        @media (max-width: 540px) {
+        /* ========================================================
+           RESPONSIVE TIERS: DESKTOP, TABLET, AND MOBILE ONLY
+           ======================================================== */
+
+        /* 1. Desktop Tier: 1025px and up */
+        @media (min-width: 1025px) {
+            body {
+                padding: 28px 16px;
+            }
+
+            .form-container {
+                max-width: 480px;
+            }
+
             .glass-card {
-                padding: 30px 22px;
+                padding: 40px 36px;
+                border-radius: var(--radius-card);
+            }
+
+            .card-header {
+                margin-bottom: 28px;
+            }
+
+            .brand-icon-wrap {
+                width: 54px;
+                height: 54px;
+                border-radius: 16px;
+                margin-bottom: 16px;
             }
 
             .form-heading {
-                font-size: 1.5rem;
+                font-size: 1.75rem;
+            }
+
+            .form-subheading {
+                font-size: 0.9rem;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+        }
+
+        /* 2. Tablet Tier: 641px to 1024px */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            body {
+                padding: 24px 20px;
+            }
+
+            .form-container {
+                max-width: 460px;
+            }
+
+            .glass-card {
+                padding: 36px 32px;
+                border-radius: 22px;
+            }
+
+            .card-header {
+                margin-bottom: 24px;
+            }
+
+            .brand-icon-wrap {
+                width: 50px;
+                height: 50px;
+                border-radius: 15px;
+                margin-bottom: 14px;
+            }
+
+            .form-heading {
+                font-size: 1.65rem;
+            }
+
+            .form-subheading {
+                font-size: 0.88rem;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+        }
+
+        /* 3. Mobile Tier: up to 640px */
+        @media (max-width: 640px) {
+            body {
+                padding: 16px 12px;
+            }
+
+            .ambient-glow-1,
+            .ambient-glow-2 {
+                width: 280px;
+                height: 280px;
+                filter: blur(60px);
+            }
+
+            .form-container {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .glass-card {
+                padding: 24px 18px;
+                border-radius: 18px;
+            }
+
+            .card-header {
+                margin-bottom: 20px;
+            }
+
+            .brand-icon-wrap {
+                width: 46px;
+                height: 46px;
+                border-radius: 14px;
+                margin-bottom: 12px;
+            }
+
+            .badge-auth {
+                font-size: 0.72rem;
+                padding: 3px 10px;
+                margin-bottom: 10px;
+            }
+
+            .form-heading {
+                font-size: 1.45rem;
+                letter-spacing: -0.02em;
+            }
+
+            .form-subheading {
+                font-size: 0.84rem;
+            }
+
+            .alert-box {
+                padding: 12px 14px;
+                font-size: 0.82rem;
+                margin-bottom: 18px;
+            }
+
+            .form-stack {
+                gap: 16px;
+            }
+
+            .form-label {
+                font-size: 0.74rem;
+            }
+
+            .form-input {
+                padding: 11px 12px 11px 38px;
+                font-size: 0.9rem;
+                border-radius: 10px;
+            }
+
+            .input-lead-icon {
+                left: 12px;
+            }
+
+            .input-trail-btn {
+                right: 10px;
+            }
+
+            .options-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin-top: 0;
+            }
+
+            .checkbox-label {
+                font-size: 0.78rem;
+            }
+
+            .forgot-link {
+                font-size: 0.78rem;
+            }
+
+            .btn-submit {
+                padding: 12px 20px;
+                font-size: 0.92rem;
+                border-radius: 10px;
+            }
+
+            .social-divider {
+                margin: 20px 0 16px;
             }
 
             .social-grid {
                 grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .btn-social {
+                padding: 11px 16px;
+                font-size: 0.84rem;
+                border-radius: 10px;
+                width: 100%;
+            }
+
+            .card-footer {
+                margin-top: 20px;
+                font-size: 0.8rem;
+            }
+
+            .security-bar {
+                margin-top: 16px;
+                padding-top: 14px;
+                font-size: 0.7rem;
+            }
+
+            .back-link-box {
+                margin-top: 16px;
+            }
+
+            .back-link {
+                font-size: 0.78rem;
+            }
+        }
+
+        /* Micro-Mobile Refinement: 380px and below */
+        @media (max-width: 380px) {
+            .glass-card {
+                padding: 20px 14px;
+                border-radius: 16px;
+            }
+
+            .options-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
             }
         }
     </style>
