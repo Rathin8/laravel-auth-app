@@ -10,12 +10,23 @@ services:
       - .env
     environment:
       APP_ENV: local
+      APP_URL: ${APP_URL_DOCKER_LOCAL}
+
       DB_CONNECTION: mysql
       DB_HOST: db
       DB_PORT: 3306
       DB_DATABASE: laravel_practice
       DB_USERNAME: laravel_user
       DB_PASSWORD: ${DB_PASSWORD}
+
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI_DOCKER_LOCAL}
+
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID_DOCKER_LOCAL}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET_DOCKER_LOCAL}
+      GITHUB_REDIRECT_URI: ${GITHUB_REDIRECT_URI_DOCKER_LOCAL}
+
     depends_on:
       db:
         condition: service_healthy
