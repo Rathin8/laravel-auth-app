@@ -328,6 +328,13 @@
         }
 
         /* Action Buttons */
+        .profile-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .hero-actions {
             display: flex;
             align-items: center;
@@ -760,21 +767,376 @@
             flex-wrap: wrap;
         }
 
-        @media (max-width: 640px) {
+        /* ========================================================
+           RESPONSIVE TIERS: DESKTOP, TABLET, AND MOBILE ONLY
+           ======================================================== */
+
+        /* 1. Desktop Tier: 1025px and up */
+        @media (min-width: 1025px) {
             .app-container {
-                padding: 16px 14px 36px;
-            }
-
-            .hero-card {
-                padding: 26px 20px;
-            }
-
-            .hero-title {
-                font-size: 1.7rem;
+                max-width: 1060px;
+                padding: 28px 24px 56px;
             }
 
             .navbar {
+                padding: 14px 24px;
+                margin-bottom: 36px;
+            }
+
+            .hero-card {
+                padding: 40px;
+                border-radius: var(--radius-lg);
+                margin-bottom: 32px;
+            }
+
+            .hero-title {
+                font-size: 2.25rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.05rem;
+                margin-bottom: 28px;
+            }
+
+            .dashboard-header-card {
+                padding: 34px 38px;
+                border-radius: var(--radius-lg);
+            }
+
+            .dashboard-title {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+
+            .dashboard-stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 18px;
+            }
+        }
+
+        /* 2. Tablet Tier: 641px to 1024px */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .app-container {
+                padding: 22px 20px 44px;
+                max-width: 100%;
+            }
+
+            .navbar {
+                padding: 12px 20px;
+                margin-bottom: 28px;
+            }
+
+            .nav-link {
+                padding: 7px 14px;
+                font-size: 0.84rem;
+            }
+
+            .hero-card {
+                padding: 32px 28px;
+                border-radius: 18px;
+                margin-bottom: 28px;
+            }
+
+            .hero-title {
+                font-size: 1.9rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.98rem;
+                max-width: 100%;
+                margin-bottom: 24px;
+            }
+
+            .auth-profile-box {
+                padding: 18px 20px;
+                gap: 16px;
+            }
+
+            .hero-actions {
+                gap: 12px;
+            }
+
+            .dashboard-header-card {
+                padding: 28px 28px;
+                border-radius: 18px;
+                gap: 20px;
+            }
+
+            .dashboard-title {
+                font-size: 1.75rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
+            }
+
+            .dashboard-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+        }
+
+        /* 3. Mobile Tier: up to 640px */
+        @media (max-width: 640px) {
+            .ambient-glow-top {
+                width: 320px;
+                height: 240px;
+                top: -80px;
+                filter: blur(55px);
+            }
+
+            .ambient-glow-bottom {
+                width: 300px;
+                height: 220px;
+                bottom: -80px;
+                filter: blur(55px);
+            }
+
+            .app-container {
+                padding: 14px 12px 36px;
+            }
+
+            .navbar {
+                padding: 10px 14px;
+                border-radius: 18px;
+                margin-bottom: 22px;
+                gap: 8px;
+            }
+
+            .brand-link {
+                gap: 10px;
+            }
+
+            .brand-icon {
+                width: 32px;
+                height: 32px;
+                border-radius: 8px;
+            }
+
+            .brand-name {
+                font-size: 0.95rem;
+            }
+
+            .nav-links {
+                gap: 6px;
+            }
+
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 0.78rem;
+            }
+
+            .user-pill {
+                padding: 3px 8px 3px 4px;
+                font-size: 0.78rem;
+                gap: 6px;
+            }
+
+            .user-pill-avatar {
+                width: 22px;
+                height: 22px;
+                font-size: 0.72rem;
+            }
+
+            .user-pill-name {
+                max-width: 80px;
+            }
+
+            .btn-nav-logout {
+                padding: 6px 10px;
+                font-size: 0.78rem;
+            }
+
+            .alert-success {
+                padding: 12px 14px;
+                font-size: 0.85rem;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .hero-card {
+                padding: 22px 16px;
+                border-radius: 16px;
+                margin-bottom: 20px;
+            }
+
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 4px 10px;
+                margin-bottom: 14px;
+            }
+
+            .hero-title {
+                font-size: 1.45rem;
+                line-height: 1.25;
+                margin-bottom: 10px;
+                word-break: break-word;
+            }
+
+            .hero-subtitle {
+                font-size: 0.88rem;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+
+            .auth-profile-box {
+                padding: 16px 14px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+                margin-bottom: 20px;
+            }
+
+            .profile-info {
+                gap: 12px;
+            }
+
+            .profile-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                flex-shrink: 0;
+            }
+
+            .profile-details h3 {
+                font-size: 0.92rem;
+                margin-bottom: 2px;
+            }
+
+            .profile-details p {
+                font-size: 0.8rem;
+                line-height: 1.45;
+            }
+
+            .profile-actions {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+            }
+
+            .profile-actions .btn {
+                flex: 1;
+                justify-content: center;
+                text-align: center;
+                font-size: 0.82rem;
+                padding: 9px 12px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+                justify-content: center;
                 padding: 12px 18px;
+                font-size: 0.9rem;
+            }
+
+            .dashboard-header-card {
+                padding: 20px 16px;
+                border-radius: 16px;
+                gap: 16px;
+            }
+
+            .dashboard-badge {
+                font-size: 0.74rem;
+                padding: 4px 10px;
+                margin-bottom: 10px;
+            }
+
+            .dashboard-title {
+                font-size: 1.45rem;
+                line-height: 1.25;
+                margin-bottom: 8px;
+                word-break: break-word;
+            }
+
+            .dashboard-subtitle {
+                font-size: 0.86rem;
+                line-height: 1.5;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .dashboard-stats-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 16px 18px;
+            }
+
+            .dashboard-actions-card {
+                padding: 18px 16px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .dashboard-quick-buttons {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .dashboard-quick-buttons .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .app-footer {
+                padding: 20px 12px;
+                font-size: 0.78rem;
+            }
+
+            .footer-badges {
+                gap: 6px;
+            }
+
+            .footer-pill {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+        }
+
+        /* Micro-Mobile Refinement: 380px and below */
+        @media (max-width: 380px) {
+            .navbar {
+                padding: 8px 10px;
+            }
+
+            .brand-name {
+                font-size: 0.88rem;
+            }
+
+            .nav-links {
+                gap: 4px;
+            }
+
+            .nav-link {
+                padding: 5px 7px;
+                font-size: 0.74rem;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+
+            .profile-actions .btn {
+                width: 100%;
             }
         }
     </style>
@@ -882,7 +1244,7 @@
                                 <p id="profileEmail">You are not currently logged in. Create an account or sign in to test the auth flow.</p>
                             </div>
                         </div>
-                        <div id="profileActionArea" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                        <div id="profileActionArea" class="profile-actions">
                             <a href="{{ route('login') }}" class="btn btn-secondary btn-sm" id="profileLoginBtn">
                                 Sign In
                             </a>
