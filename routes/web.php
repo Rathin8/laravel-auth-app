@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SocialAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,12 @@ Route::middleware('guest')->group(function () {
     })->name('login');
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+    Route::get('/auth/{provider}/redirect', [SocialAuthController::class, 'redirect'])
+        ->name('social.redirect')
+        ->where('provider', 'google|github');
+
+    Route::get('/auth/{provider}/callback', [SocialAuthController::class, 'callback'])
+        ->name('social.callback')
+        ->where('provider', 'google|github');
 });
