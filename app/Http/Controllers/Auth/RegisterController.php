@@ -31,6 +31,7 @@ class RegisterController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'],
+            'terms_accepted_at' => now(),
         ]);
 
         event(new Registered($user));

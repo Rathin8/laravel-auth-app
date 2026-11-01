@@ -363,6 +363,246 @@
             color: #a5b4fc;
         }
 
+        /* ========================================================
+           SIMPLE TERMS OF SERVICE & PRIVACY POLICY MODAL
+           ======================================================== */
+        .legal-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 7, 15, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        .legal-modal-backdrop::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .legal-modal-backdrop::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .legal-modal-backdrop::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 10px;
+        }
+
+        .legal-modal-backdrop::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .legal-modal-backdrop.is-active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .legal-modal-dialog {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            width: 100%;
+            max-width: 500px;
+            max-height: 85vh;
+            max-height: 85dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: auto;
+            animation: modalFadeIn 0.2s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .legal-modal-header {
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .legal-modal-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .legal-modal-close {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.4rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 6px;
+            transition: color 0.2s ease;
+        }
+
+        .legal-modal-close:hover {
+            color: #ffffff;
+        }
+
+        .legal-modal-body {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            padding: 16px 18px;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #94a3b8;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        .legal-modal-body::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .legal-modal-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .legal-modal-body::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 10px;
+        }
+
+        .legal-modal-body::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .legal-section {
+            margin-bottom: 16px;
+        }
+
+        .legal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .legal-section h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .legal-section p {
+            margin-bottom: 8px;
+        }
+
+        .legal-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .legal-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 14px 0;
+        }
+
+        .legal-modal-footer {
+            padding: 12px 18px 16px;
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .legal-checkbox-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .legal-check-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .legal-check-input {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .legal-footer-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 2px;
+        }
+
+        .btn-modal-cancel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-input);
+            color: #cbd5e1;
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-modal-cancel:hover {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+        }
+
+        .btn-modal-done {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            background: var(--primary-gradient);
+            border: 1px solid transparent;
+            border-radius: var(--radius-input);
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-modal-done:hover {
+            opacity: 0.9;
+        }
+
         /* Submit Button */
         .btn-submit {
             width: 100%;
@@ -548,6 +788,16 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 12px;
             }
+
+            .legal-modal-dialog {
+                max-width: 620px;
+                max-height: 85vh;
+            }
+
+            .legal-modal-body {
+                max-height: 310px;
+                padding: 20px 24px;
+            }
         }
 
         /* 2. Tablet Tier: 641px to 1024px */
@@ -588,9 +838,13 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 12px;
             }
+
+            .legal-modal-dialog {
+                max-width: 500px;
+            }
         }
 
-        /* 3. Mobile Tier: up to 640px */
+        /* 3. Mobile Tier: 640px and down */
         @media (max-width: 640px) {
             body {
                 padding: 16px 12px;
@@ -731,6 +985,67 @@
             .back-link {
                 font-size: 0.78rem;
             }
+
+            .legal-modal-backdrop {
+                padding: 10px;
+                align-items: center;
+            }
+
+            .legal-modal-dialog {
+                width: 100%;
+                max-width: 100%;
+                max-height: 85vh;
+                max-height: 85dvh;
+                border-radius: 14px;
+                margin: auto;
+            }
+
+            .legal-modal-header {
+                padding: 12px 16px;
+            }
+
+            .legal-modal-title {
+                font-size: 0.95rem;
+            }
+
+            .legal-modal-body {
+                padding: 12px 16px;
+                font-size: 0.82rem;
+                line-height: 1.5;
+            }
+
+            .legal-section h4 {
+                font-size: 0.88rem;
+            }
+
+            .legal-modal-footer {
+                padding: 10px 16px 14px;
+                gap: 10px;
+            }
+
+            .legal-checkbox-list {
+                gap: 8px;
+            }
+
+            .legal-check-label {
+                font-size: 0.78rem;
+                gap: 8px;
+            }
+
+            .legal-check-input {
+                width: 16px;
+                height: 16px;
+            }
+
+            .legal-footer-btns {
+                gap: 8px;
+            }
+
+            .btn-modal-cancel,
+            .btn-modal-done {
+                padding: 9px 12px;
+                font-size: 0.82rem;
+            }
         }
 
         /* Micro-Mobile Refinement: 380px and below */
@@ -738,6 +1053,44 @@
             .glass-card {
                 padding: 20px 14px;
                 border-radius: 16px;
+            }
+
+            .legal-modal-backdrop {
+                padding: 6px;
+            }
+
+            .legal-modal-dialog {
+                max-height: 88vh;
+                max-height: 88dvh;
+                border-radius: 12px;
+            }
+
+            .legal-modal-header {
+                padding: 10px 12px;
+            }
+
+            .legal-modal-title {
+                font-size: 0.88rem;
+            }
+
+            .legal-modal-body {
+                padding: 10px 12px;
+                font-size: 0.78rem;
+            }
+
+            .legal-modal-footer {
+                padding: 8px 12px 10px;
+                gap: 8px;
+            }
+
+            .legal-check-label {
+                font-size: 0.74rem;
+            }
+
+            .btn-modal-cancel,
+            .btn-modal-done {
+                padding: 8px 10px;
+                font-size: 0.78rem;
             }
         }
     </style>
@@ -959,7 +1312,7 @@
 
                 <!-- Terms Checkbox -->
                 <div class="form-group">
-                    <label class="checkbox-container">
+                    <label class="checkbox-container" id="termsContainer">
                         <input
                             type="checkbox"
                             name="terms"
@@ -971,9 +1324,9 @@
                         />
                         <span class="checkbox-label">
                             I accept the
-                            <a href="#" onclick="event.preventDefault()">Terms of Service</a>
+                            <a href="#" id="openTermsLink">Terms of Service</a>
                             and
-                            <a href="#" onclick="event.preventDefault()">Privacy Policy</a>.
+                            <a href="#" id="openPrivacyLink">Privacy Policy</a>.
                         </span>
                     </label>
                     @error('terms')
@@ -1040,7 +1393,58 @@
 
     </div>
 
-    <!-- Client-side Logic -->
+    <!-- Terms & Privacy Policy Modal -->
+    <div id="legalModalBackdrop" class="legal-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle" tabindex="-1">
+        <div class="legal-modal-dialog" id="legalModalDialog">
+            <!-- Modal Header -->
+            <div class="legal-modal-header">
+                <h3 class="legal-modal-title" id="legalModalTitle">Terms &amp; Privacy Policy</h3>
+                <button type="button" id="closeLegalModal" class="legal-modal-close" aria-label="Close modal">&times;</button>
+            </div>
+
+            <!-- Scrollable Content Body -->
+            <div class="legal-modal-body" id="legalModalBody">
+                <!-- Terms of Service Section -->
+                <div id="termsSection" class="legal-section">
+                    <h4>Terms of Service</h4>
+                    <p>Welcome to our platform. By registering an account or accessing any part of our services, you agree to be bound by these Terms of Service, all applicable laws, and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
+                    <p>When you create an account, you must provide accurate, complete, and up-to-date information. You are solely responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account.</p>
+                    <p>You agree not to use the services for any unlawful purpose or in any way that interrupts, damages, or impairs the functionality of the service or attempts to gain unauthorized access to server infrastructure.</p>
+                    <p>All content, features, interfaces, designs, and code within the application are the exclusive property of the company and protected by international intellectual property laws.</p>
+                </div>
+
+                <div class="legal-divider"></div>
+
+                <!-- Privacy Policy Section -->
+                <div id="privacySection" class="legal-section">
+                    <h4>Privacy Policy</h4>
+                    <p>We collect information you provide directly when registering, including your full name, email address, and authentication credentials. When authenticating via third-party providers (such as Google or GitHub), we collect verified profile details as permitted by your privacy settings.</p>
+                    <p>We use the collected information exclusively to provide, maintain, protect, and improve our services, authenticate your sessions securely, and send essential system notifications regarding your account.</p>
+                    <p>We implement state-of-the-art security measures, including strong bcrypt password hashing, encrypted HTTPS transmission, and CSRF protection, to prevent unauthorized access or disclosure.</p>
+                    <p>We do not sell, trade, or rent your personal identification information to third parties. You have the right to inspect, update, or request deletion of your account data at any time.</p>
+                </div>
+            </div>
+
+            <!-- Modal Footer: Checkboxes & Actions -->
+            <div class="legal-modal-footer">
+                <div class="legal-checkbox-list">
+                    <label class="legal-check-label">
+                        <input type="checkbox" id="modalAgreeTerms" class="legal-check-input" />
+                        <span>I have read and agree to the <strong>Terms of Service</strong></span>
+                    </label>
+                    <label class="legal-check-label">
+                        <input type="checkbox" id="modalAgreePrivacy" class="legal-check-input" />
+                        <span>I have read and agree to the <strong>Privacy Policy</strong></span>
+                    </label>
+                </div>
+
+                <div class="legal-footer-btns">
+                    <button type="button" id="closeLegalModalBtn" class="btn-modal-cancel">Cancel</button>
+                    <button type="button" id="confirmLegalBtn" class="btn-modal-done">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const passwordInput = document.getElementById('password');
@@ -1144,6 +1548,133 @@
             }
 
             confirmInput.addEventListener('input', checkMatch);
+
+            // ============================================
+            // Terms & Privacy Policy Modal Logic
+            // ============================================
+            const legalModalBackdrop = document.getElementById('legalModalBackdrop');
+            const legalModalBody = document.getElementById('legalModalBody');
+            const termsSection = document.getElementById('termsSection');
+            const privacySection = document.getElementById('privacySection');
+            const closeLegalModal = document.getElementById('closeLegalModal');
+            const closeLegalModalBtn = document.getElementById('closeLegalModalBtn');
+            const confirmLegalBtn = document.getElementById('confirmLegalBtn');
+
+            const openTermsLink = document.getElementById('openTermsLink');
+            const openPrivacyLink = document.getElementById('openPrivacyLink');
+
+            const outerTermsCheckbox = document.getElementById('terms');
+            const modalAgreeTerms = document.getElementById('modalAgreeTerms');
+            const modalAgreePrivacy = document.getElementById('modalAgreePrivacy');
+
+            function openModal(section) {
+                if (!legalModalBackdrop) return;
+                legalModalBackdrop.classList.add('is-active');
+                document.body.style.overflow = 'hidden';
+
+                if (section === 'privacy' && privacySection) {
+                    setTimeout(() => {
+                        privacySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 50);
+                } else if (legalModalBody) {
+                    legalModalBody.scrollTop = 0;
+                }
+            }
+
+            function closeModal() {
+                if (!legalModalBackdrop) return;
+                legalModalBackdrop.classList.remove('is-active');
+                document.body.style.overflow = '';
+            }
+
+            function syncLegalState() {
+                const termsAccepted = !!(modalAgreeTerms && modalAgreeTerms.checked);
+                const privacyAccepted = !!(modalAgreePrivacy && modalAgreePrivacy.checked);
+                const bothAccepted = termsAccepted && privacyAccepted;
+
+                // REQUIREMENT 2:
+                // Both options should accepted then the outer checkbox will automatically mark checked.
+                // if any one between is not accepted then the checkbox won't mark as checked.
+                if (outerTermsCheckbox) {
+                    outerTermsCheckbox.checked = bothAccepted;
+                }
+            }
+
+            if (modalAgreeTerms) {
+                modalAgreeTerms.addEventListener('change', syncLegalState);
+            }
+            if (modalAgreePrivacy) {
+                modalAgreePrivacy.addEventListener('change', syncLegalState);
+            }
+
+            if (openTermsLink) {
+                openTermsLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openModal('terms');
+                });
+            }
+
+            if (openPrivacyLink) {
+                openPrivacyLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openModal('privacy');
+                });
+            }
+
+            // Outer checkbox click handling
+            if (outerTermsCheckbox) {
+                outerTermsCheckbox.addEventListener('click', (e) => {
+                    const termsAccepted = !!(modalAgreeTerms && modalAgreeTerms.checked);
+                    const privacyAccepted = !!(modalAgreePrivacy && modalAgreePrivacy.checked);
+
+                    if (!termsAccepted || !privacyAccepted) {
+                        e.preventDefault();
+                        outerTermsCheckbox.checked = false;
+                        openModal('terms');
+                    } else if (!outerTermsCheckbox.checked) {
+                        if (modalAgreeTerms) modalAgreeTerms.checked = false;
+                        if (modalAgreePrivacy) modalAgreePrivacy.checked = false;
+                        syncLegalState();
+                    }
+                });
+            }
+
+            if (closeLegalModal) {
+                closeLegalModal.addEventListener('click', closeModal);
+            }
+            if (closeLegalModalBtn) {
+                closeLegalModalBtn.addEventListener('click', closeModal);
+            }
+
+            if (confirmLegalBtn) {
+                confirmLegalBtn.addEventListener('click', () => {
+                    syncLegalState();
+                    closeModal();
+                });
+            }
+
+            if (legalModalBackdrop) {
+                legalModalBackdrop.addEventListener('click', (e) => {
+                    if (e.target === legalModalBackdrop) {
+                        closeModal();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && legalModalBackdrop && legalModalBackdrop.classList.contains('is-active')) {
+                    closeModal();
+                }
+            });
+
+            // Initialize state from existing outer checkbox (e.g. old('terms'))
+            if (outerTermsCheckbox && outerTermsCheckbox.checked) {
+                if (modalAgreeTerms) modalAgreeTerms.checked = true;
+                if (modalAgreePrivacy) modalAgreePrivacy.checked = true;
+            }
+            syncLegalState();
 
             // Submit Loading State
             form.addEventListener('submit', () => {
