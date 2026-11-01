@@ -732,7 +732,6 @@
             }
 
             .options-row {
-                flex-direction: column;
                 align-items: flex-start;
                 gap: 8px;
             }
