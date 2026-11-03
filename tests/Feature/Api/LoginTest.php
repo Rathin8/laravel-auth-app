@@ -61,7 +61,9 @@ test('login fails with invalid password', function () {
     ]);
 
     $response->assertUnprocessable();
-    $response->assertJsonValidationErrors(['email']);
+    $response->assertJsonValidationErrors([
+        'password' => 'The provided password is incorrect.',
+    ]);
 });
 
 test('login fails with non-existent email', function () {
@@ -71,7 +73,9 @@ test('login fails with non-existent email', function () {
     ]);
 
     $response->assertUnprocessable();
-    $response->assertJsonValidationErrors(['email']);
+    $response->assertJsonValidationErrors([
+        'email' => 'No account found with this email address.',
+    ]);
 });
 
 test('login validates required fields', function () {
