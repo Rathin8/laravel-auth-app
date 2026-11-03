@@ -783,7 +783,16 @@
                 </div>
             @endif
 
-            <div id="alertBox" class="alert-box" role="alert">
+            @if (session('status'))
+                <div class="alert-box success" role="alert" style="margin-bottom: 20px;">
+                    <svg width="18" height="18" fill="none" stroke="#10b981" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 1px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>{{ session('status') }}</div>
+                </div>
+            @endif
+
+            <div id="alertBox" class="alert-box" role="alert" style="display: none;">
                 <svg id="alertIconError" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 1px;">
                     <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
                     <line x1="12" y1="8" x2="12" y2="12" stroke-width="2"></line>
@@ -795,8 +804,8 @@
                 <div id="alertMessage"></div>
             </div>
 
-            <!-- Login Form (Connected to POST /api/login) -->
-            <form id="loginForm" novalidate class="form-stack">
+            <!-- Login Form (POST /login, API alternative: /api/login) -->
+            <form method="POST" action="{{ route('login.store') }}" id="loginForm" novalidate class="form-stack">
                 @csrf
 
                 <!-- Email Input -->
@@ -816,19 +825,29 @@
                             type="email"
                             name="email"
                             id="email"
+                            value="{{ old('email') }}"
                             required
                             autocomplete="email"
                             autofocus
                             placeholder="you@example.com"
-                            class="form-input"
+                            class="form-input {{ $errors->has('email') ? 'is-invalid' : '' }}"
                         />
                     </div>
-                    <div class="field-error" id="emailError">
-                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                        </svg>
-                        <span id="emailErrorText"></span>
-                    </div>
+                    @error('email')
+                        <div class="field-error visible" id="emailError">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                            <span id="emailErrorText">{{ $message }}</span>
+                        </div>
+                    @else
+                        <div class="field-error" id="emailError">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                            <span id="emailErrorText"></span>
+                        </div>
+                    @enderror
                 </div>
 
                 <!-- Password Input -->
@@ -851,7 +870,7 @@
                             required
                             autocomplete="current-password"
                             placeholder="••••••••"
-                            class="form-input has-toggle"
+                            class="form-input has-toggle {{ $errors->has('password') ? 'is-invalid' : '' }}"
                         />
                         <button type="button" id="togglePassword" class="input-trail-btn" aria-label="Toggle password visibility">
                             <svg id="eyeIcon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -863,12 +882,21 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="field-error" id="passwordError">
-                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                        </svg>
-                        <span id="passwordErrorText"></span>
-                    </div>
+                    @error('password')
+                        <div class="field-error visible" id="passwordError">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                            <span id="passwordErrorText">{{ $message }}</span>
+                        </div>
+                    @else
+                        <div class="field-error" id="passwordError">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                            <span id="passwordErrorText"></span>
+                        </div>
+                    @enderror
                 </div>
 
                 <!-- Remember Me & Forgot Password -->
@@ -876,7 +904,10 @@
                     <label class="checkbox-container">
                         <input
                             type="checkbox"
+                            name="remember"
                             id="remember"
+                            value="1"
+                            {{ old('remember') ? 'checked' : '' }}
                             class="checkbox-input"
                         />
                         <span class="checkbox-label">Remember me</span>
@@ -1016,86 +1047,51 @@
                 alertIconSuccess.style.display = type === 'success' ? 'block' : 'none';
             }
 
-            // Clear any legacy persistent storage so sessions don't survive browser close
+            // Clear input errors when typing
+            emailInput.addEventListener('input', () => {
+                emailInput.classList.remove('is-invalid');
+                emailError.classList.remove('visible');
+                emailErrorText.textContent = '';
+            });
+
+            passwordInput.addEventListener('input', () => {
+                passwordInput.classList.remove('is-invalid');
+                passwordError.classList.remove('visible');
+                passwordErrorText.textContent = '';
+            });
+
+            // Clear any legacy persistent storage
             localStorage.removeItem('auth_token');
             localStorage.removeItem('user');
+            sessionStorage.removeItem('auth_token');
+            sessionStorage.removeItem('user');
 
-            // Detect existing token session in current browser session
-            const existingToken = sessionStorage.getItem('auth_token');
-            const existingUserStr = sessionStorage.getItem('user');
-            if (existingToken && existingUserStr) {
-                try {
-                    const parsedUser = JSON.parse(existingUserStr);
-                    const userData = parsedUser.data || parsedUser;
-                    if (userData && userData.name) {
-                        showAlert(`You are currently logged in as <strong>${userData.name}</strong>. <a href="{{ route('home') }}" style="color: #6ee7b7; text-decoration: underline; font-weight: 600; margin-left: 4px;">Return to Home &rarr;</a>`, 'success', true);
-                    }
-                } catch (e) {}
-            }
-
-            // Form Submit Listener (Connecting to POST /api/login)
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
+            // Form Submit Listener (POST to Web Session route /login)
+            form.addEventListener('submit', (e) => {
                 clearErrors();
-                setLoading(true);
 
-                const payload = {
-                    email: emailInput.value.trim(),
-                    password: passwordInput.value,
-                    device_name: 'browser_web'
-                };
+                let hasError = false;
 
-                try {
-                    const response = await fetch('/api/login', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-                        },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const data = await response.json();
-
-                    if (response.ok) {
-                        // Store token and user data in sessionStorage (cleared automatically when browser/app is closed)
-                        if (data.token) {
-                            sessionStorage.setItem('auth_token', data.token);
-                            sessionStorage.setItem('user', JSON.stringify(data.user || {}));
-                        }
-
-                        showAlert('Login successful! Redirecting to home...', 'success');
-                        btnText.textContent = 'Redirecting...';
-
-                        setTimeout(() => {
-                            window.location.replace('{{ route("home") }}');
-                        }, 750);
-                    } else if (response.status === 422) {
-                        // Validation or credentials error
-                        if (data.errors) {
-                            if (data.errors.email) {
-                                emailInput.classList.add('is-invalid');
-                                emailError.classList.add('visible');
-                                emailErrorText.textContent = data.errors.email[0];
-                            }
-                            if (data.errors.password) {
-                                passwordInput.classList.add('is-invalid');
-                                passwordError.classList.add('visible');
-                                passwordErrorText.textContent = data.errors.password[0];
-                            }
-                        }
-                        showAlert(data.message || 'Please check the errors below.');
-                        setLoading(false);
-                    } else {
-                        // Other HTTP error
-                        showAlert(data.message || 'Unable to sign in. Please try again.');
-                        setLoading(false);
-                    }
-                } catch (error) {
-                    showAlert('Network error: Unable to connect to the authentication server.');
-                    setLoading(false);
+                if (!emailInput.value.trim()) {
+                    emailInput.classList.add('is-invalid');
+                    emailError.classList.add('visible');
+                    emailErrorText.textContent = 'Please enter your email address.';
+                    hasError = true;
                 }
+
+                if (!passwordInput.value) {
+                    passwordInput.classList.add('is-invalid');
+                    passwordError.classList.add('visible');
+                    passwordErrorText.textContent = 'Please enter your password.';
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    e.preventDefault();
+                    return;
+                }
+
+                setLoading(true);
             });
 
             // Invalidate bfcache and force reload if navigating back/forward

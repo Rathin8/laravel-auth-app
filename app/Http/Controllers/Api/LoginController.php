@@ -26,9 +26,15 @@ class LoginController extends Controller
         /** @var User|null $user */
         $user = User::where('email', '=', $validated['email'], 'and')->first();
 
-        if (! $user || ! Hash::check($validated['password'], (string) $user->password)) {
+        if (! $user) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials do not match our records.'],
+                'email' => ['No account found with this email address.'],
+            ]);
+        }
+
+        if (! Hash::check($validated['password'], (string) $user->password)) {
+            throw ValidationException::withMessages([
+                'password' => ['The provided password is incorrect.'],
             ]);
         }
 
