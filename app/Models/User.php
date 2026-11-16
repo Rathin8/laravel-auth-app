@@ -26,6 +26,7 @@ class User extends Authenticatable
         'password',
         'avatar',
         'terms_accepted_at',
+        'welcome_email_sent_at',
     ];
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'terms_accepted_at' => 'datetime',
+            'welcome_email_sent_at' => 'datetime',
         ];
     }
 

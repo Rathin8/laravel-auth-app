@@ -62,6 +62,9 @@ test('registers and logs in a new user via google callback', function () {
         'avatar' => 'https://lh3.googleusercontent.com/avatar.jpg',
     ]);
 
+    $createdUser = User::where('email', 'google.user@example.com')->first();
+    expect($createdUser->welcome_email_sent_at)->not->toBeNull();
+
     $response->assertRedirect(route('home'));
 });
 
