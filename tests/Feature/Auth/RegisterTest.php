@@ -1,7 +1,9 @@
 <?php
 
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 
 uses(RefreshDatabase::class);
 
@@ -30,8 +32,33 @@ test('new users can register with valid credentials', function () {
 
     $user = User::where('email', 'alice@example.com')->first();
     expect($user->terms_accepted_at)->not->toBeNull();
+    expect($user->welcome_email_sent_at)->not->toBeNull();
 
     $response->assertRedirect(route('home'));
+});
+
+test('registration sends welcome email and stores the sent timestamp', function () {
+    Mail::fake();
+
+    $response = $this->post('/register', [
+        'name' => 'Charlie Welcome',
+        'email' => 'charlie.welcome@example.com',
+        'password' => 'SecurePass123!',
+        'password_confirmation' => 'SecurePass123!',
+        'terms' => '1',
+    ]);
+
+    $response->assertRedirect(route('home'));
+
+    Mail::assertQueued(WelcomeEmail::class, function (WelcomeEmail $mail) {
+        return $mail->hasTo('charlie.welcome@example.com')
+            && $mail->user->email === 'charlie.welcome@example.com'
+            && $mail->sentAt !== null;
+    });
+
+    $user = User::where('email', 'charlie.welcome@example.com')->first();
+    expect($user)->not->toBeNull();
+    expect($user->welcome_email_sent_at)->not->toBeNull();
 });
 
 test('registration requires all mandatory fields', function () {
